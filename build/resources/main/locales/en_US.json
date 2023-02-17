@@ -1,0 +1,9 @@
+{
+	"label": "Calendar Booking",
+	"description": "Google calendar booking.",
+	"CalanderBooking.label": "CalendarBooking",
+	"CalanderBooking.description": "Book calendar according to availability",
+	"CalanderBooking.node_label": "Input",
+	"CalanderBooking.return_label": "Message regarding status",
+	"CalanderBooking.secondString.label": "Second string"
+}
