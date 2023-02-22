@@ -34,9 +34,6 @@ public class CalanderBookingBot {
             String secondString) {
 
         String message = null;
-//        if ("".equals(secondString.trim()))
-//            throw new BotCommandException("emptyInputString : secondString");
-
         //Business logic
         try {
             CalanderBookingImp calanderBookingImp = new CalanderBookingImp();
