@@ -3,6 +3,9 @@ package com.automationanywhere.bot.calendarBooking;
 import com.automationanywhere.bot.emailNotification.EmailNotification;
 
 import java.io.FileInputStream;
+import java.io.InputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -25,15 +28,16 @@ public class CalanderBookingImp {
 
     private Calendar calendarService;
     private String message ;
-    private static final String CREDENTIALS_FILE_PATH = "**";
+//    private static final String CREDENTIALS_FILE_PATH = "F:\\Official\\a360calenderchecker-8c3bb4938689.json";
+    private InputStream inputStream = getClass().getResourceAsStream("/a360calenderchecker-8c3bb4938689.json");
 
-    private  Date startDate = new Date(123,2,22,20,00);
+    private  Date startDate;
 
-    private  Date endDate = new Date(123,2,22,21,00);
+    private  Date endDate;
 
-    private final String emailId = "**";
+    private String emailId;
 
-    private final String applicationName = "**";
+    private final String applicationName = "A360CalenderChecker";
 
 
     public CalanderBookingImp(Calendar calendarService) {
@@ -42,11 +46,17 @@ public class CalanderBookingImp {
     public CalanderBookingImp(){
     }
 
-    public String bookFirstFreeTimeSlot() throws IOException, GeneralSecurityException {
+    public String bookFirstFreeTimeSlot(String gmail, String startTimeI, String endTimeI) throws IOException, GeneralSecurityException, ParseException {
         // Build the HTTP transport and JSON factory
 
 
         try {
+
+            Date date1=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").parse(startTimeI);
+            Date date2=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").parse(endTimeI);
+            startDate = date1;
+            endDate = date2;
+            emailId = gmail;
             HttpTransport httpTransport = new NetHttpTransport();
             JsonFactory jsonFactory = new JacksonFactory();
 
@@ -68,7 +78,7 @@ public class CalanderBookingImp {
             freeBusyRequest.setTimeMax(timeMax);
 
             // Create the credentials object for the user
-            GoogleCredential credential = GoogleCredential.fromStream(new FileInputStream(CREDENTIALS_FILE_PATH));
+            GoogleCredential credential = GoogleCredential.fromStream(inputStream);
             if (credential.createScopedRequired()) {
                 credential = credential.createScoped(Arrays.asList(CalendarScopes.CALENDAR));
             }

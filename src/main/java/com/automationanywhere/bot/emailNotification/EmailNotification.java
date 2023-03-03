@@ -7,11 +7,11 @@ import javax.mail.internet.InternetAddress;
 
 public class EmailNotification {
 
-    private final String userName = "**";
+    private final String userName = "atma@xcubated.in";
 
-    private final String passWord = "**";
+    private final String passWord = "Qv.S~J~EZYxa";
 
-    private final String host = "**";
+    private final String host = "mail.xcubated.in";
 
         public void sendEmail (String recipient, String subject, String body) throws MessagingException {
         // Create a properties object to store SMTP information
